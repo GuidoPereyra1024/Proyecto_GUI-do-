@@ -2,83 +2,73 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUIPincel extends JFrame{
-    
-    //Atributos de la aplicación
+public class GUIPincel extends JFrame {
+
     private MatrizColor matriz;
     private ColorRGB nuevoColor;
-    
-    //Objetos Gráficos
-    //BOTONES
-    private JButton boton;   
-    private JButton [][] botonMatriz;
-    private JCheckBox  consultar;
-    
-    //ETIQUETAS
-    private JLabel etiquetaRojo;
-    private JLabel etiquetaVerde;
-    private JLabel etiquetaAzul; 
-    
-    //CAMPOS DE TEXTO
-    private JTextField rojo;
-    private JTextField verde;
-    private JTextField azul;
-    
-    //PANELES
+
+    private JButton[][] botonMatriz;
     private JPanel panelMenu;
-    private JPanel panelMatriz;   
-    private JPanel panelContainerControlColor;
-    private JPanel panelContainerBoton;
-    private JPanel panelColores;
-    private JPanel panelControlColor;
-    
-    public GUIPincel(MatrizColor c){
+    private JPanel panelMatriz;
+
+    public GUIPincel(MatrizColor c) {
         super("Pincel de IPOO");
-        
-        matriz=c;
-        nuevoColor= new ColorRGB(0,0,0);
+
+        matriz = c;
+        nuevoColor = new ColorRGB(0, 0, 0);
 
         setSize(700, 600);
-        
-        getContentPane().setLayout(new BorderLayout()); 
-        
-        inicializarPanelMenu();
+        setLayout(new BorderLayout());
+
         inicializarPanelMatriz();
+        inicializarPanelMenu();
 
-        //Agrego cada panel al panel de contenido
-        getContentPane().add(panelMatriz, BorderLayout.NORTH);
-        getContentPane().add(panelMenu, BorderLayout.SOUTH);
-        
-        setVisible(true);
+        add(panelMatriz, BorderLayout.CENTER);
+        add(panelMenu, BorderLayout.SOUTH);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
-    
-    private void inicializarPanelMatriz(){
+    private void inicializarPanelMatriz() {
+        panelMatriz = new JPanel();
 
-    }
-    
-    private void inicializarPanelMenu(){
+        panelMatriz.setLayout(new GridLayout(
+            matriz.cantFilas(),
+            matriz.cantColumnas()
+        ));
 
-    }
-    
-    
-    private class OyenteMatriz implements ActionListener{
-        public void actionPerformed(ActionEvent e){
+        botonMatriz = new JButton[
+            matriz.cantFilas()
+        ][
+            matriz.cantColumnas()
+        ];
 
+        for (int f = 0; f < matriz.cantFilas(); f++) {
+            for (int c = 0; c < matriz.cantColumnas(); c++) {
+                JButton boton = new JButton();
+
+                boton.setBackground(Color.WHITE);
+                boton.setOpaque(true);
+                boton.setBorderPainted(true);
+                boton.addActionListener(new OyenteMatriz());
+
+                botonMatriz[f][c] = boton;
+                panelMatriz.add(boton);
+            }
         }
     }
-    
-    private class OyenteBotonPincel implements ActionListener{
-        public void actionPerformed(ActionEvent e){
 
+    private void inicializarPanelMenu() {
+        panelMenu = new JPanel();
+        panelMenu.add(new JLabel("Panel de control"));
+    }
+
+    private class OyenteMatriz implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Por ahora no hace nada.
         }
     }
-    
-    private class OyenteBotonCheckBox implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            
-        }
-    } 
 }

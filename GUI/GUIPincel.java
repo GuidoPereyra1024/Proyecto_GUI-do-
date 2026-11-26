@@ -85,21 +85,24 @@ public class GUIPincel extends JFrame {
         panelMenu = new JPanel(new BorderLayout());
         panelMenu.add(new JLabel("Panel de control"));
         
-        etiquetaRojo=new JLabel("Rojo");
-        etiquetaAzul=new JLabel("Azul");
-        etiquetaVerde=new JLabel("Verde");
+        etiquetaRojo=new JLabel("Rojo:");
+        etiquetaAzul=new JLabel("Azul:");
+        etiquetaVerde=new JLabel("Verde:");
 
-        rojo = new JTextField("0", 3);
-        azul = new JTextField("0", 3);
+        rojo = new JTextField("0", 3);                  
+        azul = new JTextField("0", 3);                           
         verde = new JTextField("0", 3);
 
         panelColores = new JPanel(new GridLayout(3, 2, 5, 5));
+        panelColores.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelColores.add(etiquetaRojo);
         panelColores.add(rojo);
         panelColores.add(etiquetaAzul);
         panelColores.add(azul);
         panelColores.add(etiquetaVerde);
         panelColores.add(verde);
+
+
         
         //Panel Control Color
         panelControlColor = new JPanel(new FlowLayout());
@@ -133,6 +136,15 @@ public class GUIPincel extends JFrame {
     private class OyenteBotonPincel implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             // Por ahora no hace nada.
+            int r = Integer.parseInt(rojo.getText());
+            int v = Integer.parseInt(verde.getText());
+            int a = Integer.parseInt(azul.getText());
+            
+            if(r>=0 && r<=255 && v>=0 && v<=255 && a>=0 && a<=255) {
+                panelControlColor.setBackground(new Color(r, v, a));
+            } else {
+                JOptionPane.showMessageDialog(null, "Los valores de RGB deben estar entre 0 y 255", "Error", JOptionPane.ERROR_MESSAGE);
+            } 
         }
     }
 

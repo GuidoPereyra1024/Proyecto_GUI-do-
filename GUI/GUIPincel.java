@@ -78,6 +78,7 @@ public class GUIPincel extends JFrame {
                 panelMatriz.add(boton);
             }
         }
+        
     }
 
     private void inicializarPanelMenu() {
@@ -116,10 +117,12 @@ public class GUIPincel extends JFrame {
         panelContainerBoton = new JPanel(new FlowLayout());
         boton = new JButton("Confirmar Color");
         consultar = new JCheckBox("Ver RGB");
+
         panelContainerBoton.add(boton);
+        boton.addActionListener(new OyenteBotonPincel());
+        
         panelContainerBoton.add(consultar);
         consultar.addActionListener(new OyenteBotonCheckBox());
-
 
         //Posiciones en panelMenu BorderLayout
         panelMenu.add(panelContainerControlColor, BorderLayout.CENTER);
@@ -130,6 +133,7 @@ public class GUIPincel extends JFrame {
     private class OyenteMatriz implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // Por ahora no hace nada.
+            
         }
     }
 
@@ -164,6 +168,7 @@ public class GUIPincel extends JFrame {
                     } else {
                         botonMatriz[i][j].setText("");
                     }
+                    botonMatriz[i][j].setEnabled(!marcado);
                 }
             }
         }

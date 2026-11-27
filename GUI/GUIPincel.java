@@ -136,8 +136,8 @@ public class GUIPincel extends JFrame {
 
             ColorRGB colorC=matriz.obtenerColor(fila, columna);
             colorC.establecerRojo(nuevoColor.obtenerRojo());
-            colorC.establecerRojo(nuevoColor.obtenerVerde());
-            colorC.establecerRojo(nuevoColor.obtenerAzul());
+            colorC.establecerVerde(nuevoColor.obtenerVerde());
+            colorC.establecerAzul(nuevoColor.obtenerAzul());
 
             Color colorAgregar=new Color(nuevoColor.obtenerRojo(), nuevoColor.obtenerVerde(), nuevoColor.obtenerAzul());
             botonMatriz[fila][columna].setBackground(colorAgregar);    

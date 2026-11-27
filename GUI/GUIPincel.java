@@ -86,22 +86,21 @@ public class GUIPincel extends JFrame {
         panelMenu.add(new JLabel("Panel de control"));
         
         etiquetaRojo=new JLabel("Rojo:");
-        etiquetaAzul=new JLabel("Azul:");
         etiquetaVerde=new JLabel("Verde:");
+        etiquetaAzul=new JLabel("Azul:");
 
-        rojo = new JTextField("0", 3);                  
-        azul = new JTextField("0", 3);                           
+        rojo = new JTextField("0", 3); 
+        azul = new JTextField("0", 3);                                            
         verde = new JTextField("0", 3);
 
         panelColores = new JPanel(new GridLayout(3, 2, 5, 5));
         panelColores.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelColores.add(etiquetaRojo);
         panelColores.add(rojo);
-        panelColores.add(etiquetaAzul);
-        panelColores.add(azul);
         panelColores.add(etiquetaVerde);
         panelColores.add(verde);
-
+        panelColores.add(etiquetaAzul);
+        panelColores.add(azul);
 
         
         //Panel Control Color
@@ -119,6 +118,7 @@ public class GUIPincel extends JFrame {
         consultar = new JCheckBox("Ver RGB");
         panelContainerBoton.add(boton);
         panelContainerBoton.add(consultar);
+        consultar.addActionListener(new OyenteBotonCheckBox());
 
 
         //Posiciones en panelMenu BorderLayout
@@ -151,6 +151,21 @@ public class GUIPincel extends JFrame {
     private class OyenteBotonCheckBox implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             // Por ahora no hace nada.
+            boolean marcado = consultar.isSelected();
+
+            for(int i = 0; i < matriz.cantFilas(); i++) {
+                for(int j = 0; j < matriz.cantColumnas(); j++) {
+                    if(marcado) {
+                        Color color = botonMatriz[i][j].getBackground();
+                        int r = color.getRed();
+                        int g = color.getGreen();
+                        int b = color.getBlue();
+                        botonMatriz[i][j].setText( "(" +r +", " + g + ", " + b +")" );
+                    } else {
+                        botonMatriz[i][j].setText("");
+                    }
+                }
+            }
         }
     }
 }

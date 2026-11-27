@@ -81,7 +81,6 @@ public class GUIPincel extends JFrame {
     private void inicializarPanelMenu() {
         // Panel Menu
         panelMenu = new JPanel(new BorderLayout());
-        panelMenu.add(new JLabel("Panel de control"));
 
         etiquetaRojo = new JLabel("Rojo:");
         etiquetaVerde = new JLabel("Verde:");
@@ -164,6 +163,10 @@ public class GUIPincel extends JFrame {
                 nuevoColor.establecerRojo(rojoAnterior);
                 nuevoColor.establecerVerde(verdeAnterior);
                 nuevoColor.establecerAzul(azulAnterior);
+
+                rojo.setText("" + rojoAnterior);
+                verde.setText("" + verdeAnterior);
+                azul.setText("" + azulAnterior);
             }
         }
     }
